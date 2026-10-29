@@ -18,7 +18,6 @@ export async function lireJson(chemin) {
 // Lit les quatre fichiers EN MÊME TEMPS avec Promise.all.
 // Renvoie { parcelles, cultures, releves, recoltes }.
 export async function chargerDonnees(dossier) {
-  throw new Error("TODO Membre 4 : coder chargerDonnees dans src/donnees.js");
 }
 
 // Vérifie les textes tapés dans le terminal et renvoie un nouveau relevé.
