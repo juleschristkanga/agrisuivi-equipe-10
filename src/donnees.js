@@ -31,9 +31,15 @@ export async function chargerDonnees(dossier) {
 // Exemple : creerReleve('p07', '64', '29', '2026-10-29')
 //   → { parcelle: 'P07', date: '2026-10-29', humidite: 64, temperature: 29 }
 export function creerReleve(parcelle, humiditeTexte, temperatureTexte, date) {
-  throw new Error("TODO Membre 4 : coder creerReleve dans src/donnees.js");
-}
+  const humidite = parseInt(humiditeTexte);
+  const temperature = parseInt(temperatureTexte);
 
+  if (isNaN(humidite) || isNaN(temperature)) {
+    throw new Error("Les valeurs d'humidité et de température doivent être des nombres.");
+  }
+
+  return { parcelle, date, humidite, temperature };
+}
 // Ajoute le relevé à la fin du fichier JSON, enregistre le fichier,
 // puis renvoie le nouveau nombre de relevés.
 export async function ajouterReleve(chemin, releve) {
