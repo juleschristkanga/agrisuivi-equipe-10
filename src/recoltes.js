@@ -10,7 +10,7 @@ export function totalRecolte(recoltes, idParcelle) {
 // Renvoie le rendement en kg par hectare, arrondi à l'entier le plus proche.
 // Une surface nulle ou négative est une erreur : on lance une RangeError.
 export function rendement(kg, surface) {
-   if (surface <= 0) {
+  if (surface <= 0) {
     throw new RangeError("La surface doit être un nombre positif.");
   }
   return Math.round(kg / surface);
@@ -18,17 +18,25 @@ export function rendement(kg, surface) {
 
 // Renvoie le revenu estimé en FCFA.
 export function revenu(kg, prixKg) {
- return kg * prixKg;  
+  return kg * prixKg;
 }
 
 // Renvoie une ligne de bilan par parcelle, dans le même ordre que parcelles.
 // Chaque ligne : { id, producteur, culture, kg, rendement, revenu }
 export function bilanRecoltes(parcelles, recoltes, cultures) {
- return parcelles.map((p) => {
+  return parcelles.map((p) => {
     const kg = totalRecolte(recoltes, p.id);
-    const rendement = rendement(kg, p.surface);
-    const revenu = revenu(kg, cultures.find((c) => c.nom === p.culture)?.prixKg || 0);
-    return { id: p.id, producteur: p.producteur, culture: p.culture, kg, rendement, revenu };
+    const rendementParHectare = rendement(kg, p.surface);
+    const prixKg = cultures.find((culture) => culture.code === p.culture)?.prixKg ?? 0;
+    const revenuEstime = revenu(kg, prixKg);
+    return {
+      id: p.id,
+      producteur: p.producteur,
+      culture: p.culture,
+      kg,
+      rendement: rendementParHectare,
+      revenu: revenuEstime,
+    };
   });
 }
 

@@ -13,7 +13,7 @@ export async function lireJson(chemin) {
   } catch (erreur) {
     throw new Error(`Impossible de lire ${chemin}`, { cause: erreur });
   }
-}    
+}
 
 // Lit les quatre fichiers EN MÊME TEMPS avec Promise.all.
 // Renvoie { parcelles, cultures, releves, recoltes }.
