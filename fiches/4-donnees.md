@@ -90,11 +90,12 @@ L'id de la parcelle est renvoyé **en majuscules**.
 ```powershell
 node app.js parcelles
 node app.js releve P07 64 29
+node app.js releve
 node app.js releve P07 beaucoup 29
 node app.js releve P99 50 30
 ```
 
-Le premier relevé est accepté ; les deux suivants affichent un message `Erreur : ...` clair. Pour remettre le fichier d'origine : `git restore donnees/releves.json`.
+La commande `node app.js releve` sans valeurs vous les demande au clavier. Le premier relevé est accepté ; les deux derniers exemples affichent un message `Erreur : ...` clair. Pour remettre le fichier d'origine : `git restore donnees/releves.json`.
 
 Renommez un instant `donnees/recoltes.json`, lancez `node app.js rapport` et lisez le message : c'est votre `try` / `catch` qui l'a produit. Remettez ensuite le bon nom.
 

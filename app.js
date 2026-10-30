@@ -1,6 +1,7 @@
 // AgriSuivi — point d'entrée. Ce fichier est fourni : lisez-le, mais
 // le travail de l'équipe se fait dans le dossier src.
 import { join } from 'node:path';
+import { createInterface } from 'node:readline/promises';
 import { ajouterReleve, chargerDonnees, creerReleve, lireJson } from './src/donnees.js';
 import { formaterParcelle, parcellesParCulture, resumeParCulture, surfaceTotale, trouverParcelle } from './src/parcelles.js';
 import { alertesIrrigation } from './src/irrigation.js';
@@ -69,6 +70,23 @@ async function afficherRecoltes() {
 }
 
 async function enregistrerReleve(id, humidite, temperature) {
+  if (id === undefined || humidite === undefined || temperature === undefined) {
+    const saisie = createInterface({ input: process.stdin, output: process.stdout });
+    try {
+      if (id === undefined) {
+        id = await saisie.question('Identifiant de la parcelle (ex. P07) : ');
+      }
+      if (humidite === undefined) {
+        humidite = await saisie.question("Humidité du sol en % (0 à 100) : ");
+      }
+      if (temperature === undefined) {
+        temperature = await saisie.question('Température en °C : ');
+      }
+    } finally {
+      saisie.close();
+    }
+  }
+
   const releve = creerReleve(id, humidite, temperature, aujourdhui());
   const { parcelles } = await chargerDonnees(DOSSIER_DONNEES);
   if (trouverParcelle(parcelles, releve.parcelle) === undefined) {

@@ -96,6 +96,7 @@ Le fichier `app.js` est fourni. Chaque commande marche dès que les fonctions qu
 | `node app.js irrigation`       | Parcelles à arroser ou à drainer                        | Membres 2 et 4       |
 | `node app.js recoltes`         | Classement par revenu estimé                            | Membres 3 et 4       |
 | `node app.js releve P07 64 29` | Ajoute un relevé : parcelle, humidité %, température °C | Membres 1 et 4       |
+| `node app.js releve`            | Demande les valeurs au clavier dans le terminal         | Membres 1 et 4       |
 | `node app.js rapport`          | Écrit `sorties/rapport-AAAA-MM-JJ.txt`                  | Toute l'équipe       |
 | `node app.js station`          | Interroge les capteurs connectés                        | Bonus                |
 
