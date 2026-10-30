@@ -34,5 +34,18 @@ export function etatIrrigation(humidite, culture) {
 // Renvoie un tableau d'alertes, une par parcelle, dans le même ordre que parcelles.
 // Chaque alerte : { id, producteur, culture, moyenne, etat }
 export function alertesIrrigation(parcelles, releves, cultures) {
+  return parcelles.map((parcelle) => {
+    const culture = cultures[parcelle.culture];
+    const parcelleReleves = relevesDeParcelle(releves, parcelle.id);  
+    const moyenne = moyenneHumidite(parcelleReleves);
+    const etat = etatIrrigation(moyenne, culture);
 
+    return {
+      id: parcelle.id,
+      producteur: parcelle.producteur,
+      culture: culture,
+      moyenne: moyenne,
+      etat: etat
+    };
+  });
 }
