@@ -17,7 +17,22 @@ export function listerParEtat(alertes, etat) {
 
 // Renvoie le texte complet du rapport (voir fiches/5-equipe-rapport.md).
 export function construireRapport(donnees, date) {
-  throw new Error("TODO Équipe : coder construireRapport dans src/rapport.js");
+  const { parcelles, releves, cultures, recoltes } = donnees;
+  const alertes = alertesIrrigation(parcelles, releves, cultures);
+  const bilan = bilanRecoltes(recoltes, parcelles, cultures);
+  const parcellePlusRentable = classerParRevenu(bilan)[0];
+  return `Rapport du ${date}  
+
+Nombre de parcelles : ${parcelles.length}
+Surface totale : ${surfaceTotale(parcelles)} m²
+
+Alertes d'irrigation :
+- En attente : ${listerParEtat(alertes, "en_attente")}
+- En cours : ${listerParEtat(alertes, "en_cours")}
+- Résolues : ${listerParEtat(alertes, "resolue")}
+
+Parcelle la plus rentable : ${parcellePlusRentable?.id || "aucune"}
+`;
 }
 
 // Écrit le texte dans le fichier demandé. Crée le dossier s'il n'existe pas.
