@@ -14,5 +14,8 @@
     "test:donnees": "node --test test/donnees.test.js",
     "test:rapport": "node --test test/rapport.test.js",
     "test:station": "node --test test/station.test.js"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
   }
 }
